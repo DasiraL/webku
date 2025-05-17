@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dasira LEROUX - Pasar Game Cyberpunk</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap');
+
+  /* Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: #0a0a0a;
+    color: #e0e0ff;
+    font-family: 'Share Tech Mono', monospace;
+    overflow-x: hidden;
+  }
+  /* Glitch Effect */
+  .glitch {
+    position: relative;
+    font-family: 'Orbitron', sans-serif;
+    color: #f0f;
+    font-weight: 900;
+    font-size: 3.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: flicker 3s infinite alternate;
+    user-select: none;
+    margin: 0;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+  }
+  .glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #00f0ff;
+    animation: glitchTop 2s infinite linear alternate-reverse;
+  }
+  .glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #ff0071;
+    animation: glitchBottom 2s infinite linear alternate;
+  }
+  @keyframes glitchTop {
+    0% {
+      clip: rect(0, 9999px, 0, 0);
+    }
+    20% {
+      clip: rect(0, 9999px, 20px, 0);
+      transform: translate(-1px, -1px);
+    }
+    40% {
+      clip: rect(0, 9999px, 20px, 0);
+      transform: translate(1px, 1px);
+    }
+    60% {
+      clip: rect(0, 9999px, 0, 0);
+      transform: translate(0);
+    }
+    80% {
+      clip: rect(0, 9999px, 15px, 0);
+      transform: translate(1px, -1px);
+    }
+    100% {
+      clip: rect(0, 9999px, 0, 0);
+      transform: translate(0);
+    }
+  }
+  @keyframes glitchBottom {
+    0% {
+      clip: rect(0, 9999px, 0, 0);
+    }
+    20% {
+      clip: rect(15px, 9999px, 9999px, 0);
+      transform: translate(1px, 1px);
+    }
+    40% {
+      clip: rect(10px, 9999px, 9999px, 0);
+      transform: translate(-1px, -1px);
+    }
+    60% {
+      clip: rect(0, 9999px, 0, 0);
+      transform: translate(0);
+    }
+    80% {
+      clip: rect(10px, 9999px, 9999px, 0);
+      transform: translate(-1px, 1px);
+    }
+    100% {
+      clip: rect(0, 9999px, 0, 0);
+      transform: translate(0);
+    }
+  }
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      opacity: 1;
+    }
+    20%, 22%, 24%, 55% {
+      opacity: 0.4;
+    }
+  }
+  
+  header {
+    position: sticky;
+    top: 0;
+    background: #0b0b1a;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #ff0080;
+    z-index: 100;
+    box-shadow: 0 0 15px #ff0080;
+  }
+  header h1 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ff00d4;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    font-size: 1.8rem;
+    user-select: none;
+    text-transform: uppercase;
+  }
+  nav a {
+    color: #f0f0ff;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    position: relative;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #ff00b2;
+    transition: width 0.3s ease;
+  }
+  nav a:hover,
+  nav a:focus {
+    color: #ff00b2;
+    outline: none;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 3rem auto 5rem auto;
+    padding: 0 1rem;
+  }
+
+  .hero-section {
+    background: radial-gradient(circle at top left, #23004e 30%, #0b0b1a 100%);
+    border-radius: 15px;
+    padding: 3rem 2rem;
+    color: #ff00b2;
+    text-align: center;
+    box-shadow: 0 0 30px #ff00b2;
+    margin-bottom: 4rem;
+  }
+  .hero-section h2 {
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    user-select: none;
+  }
+  .hero-section p {
+    font-size: 1.3rem;
+    color: #f9a5d6;
+    margin: 0 0 2rem 0;
+    font-weight: 600;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff00b2, #ff4da6);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff00b2;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    outline: none;
+    background: linear-gradient(45deg, #ff4da6, #ff00b2);
+    box-shadow: 0 0 30px #ff4da6;
+  }
+
+  .products-section h3,
+  .how-to-section h3,
+  .contact-section h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ff00b2;
+    font-size: 2rem;
+    border-bottom: 3px solid #ff00b2;
+    padding-bottom: 0.3rem;
+    margin-bottom: 2rem;
+    user-select: none;
+  }
+
+  /* Products grid */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2.2rem;
+  }
+
+  .product-card {
+    background: #171732;
+    border-radius: 15px;
+    color: #fcb2dd;
+    box-shadow: 0 0 25px #ff00b2aa;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .product-card:hover,
+  .product-card:focus-within {
+    outline: none;
+    transform: translateY(-10px) rotateX(4deg);
+    box-shadow: 0 0 40px #ff4da6;
+  }
+  .product-img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    filter: drop-shadow(0 0 3px #ff00b2);
+  }
+  .product-info {
+    padding: 1.3rem 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .product-info h4 {
+    font-size: 1.2rem;
+    margin: 0 0 0.4rem 0;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff6bc0;
+  }
+  .product-info p {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #f7a9d3;
+    margin-bottom: 1.1rem;
+  }
+  .price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ff00b2;
+    user-select: none;
+    text-shadow: 0 0 8px #ff00b2;
+  }
+
+  /* How to buy steps */
+  .how-to-list {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .how-to-step {
+    background: #1f0033;
+    border-radius: 15px;
+    padding: 2rem 1.8rem;
+    max-width: 280px;
+    flex-grow: 1;
+    color: #fcb2dd;
+    box-shadow: 0 0 20px #ff00b2aa;
+    text-align: center;
+    cursor: default;
+    user-select: none;
+    transition: box-shadow 0.3s ease;
+  }
+  .how-to-step:hover {
+    box-shadow: 0 0 35px #ff4da6;
+  }
+  .step-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #ff00b2;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 12px #ff00b2;
+  }
+  .how-to-step h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+  }
+  .how-to-step p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Contact form */
+  .contact-section form {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #1c0032cc;
+    padding: 2.2rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 40px #ff00b2bb;
+    color: #fcb2dd;
+    font-size: 1rem;
+    font-feature-settings: "calt" 0;
+  }
+  .contact-section label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #ff6bc0;
+    user-select: none;
+  }
+  .contact-section input,
+  .contact-section textarea {
+    width: 100%;
+    background: #2d004a;
+    border: none;
+    border-radius: 10px;
+    color: #ffa6cb;
+    padding: 0.65rem 1rem;
+    margin-bottom: 1.25rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    box-shadow: inset 0 0 6px #ff00b2aa;
+    resize: vertical;
+    transition: box-shadow 0.3s ease;
+  }
+  .contact-section input::placeholder,
+  .contact-section textarea::placeholder {
+    color: #ffccd9aa;
+  }
+  .contact-section input:focus,
+  .contact-section textarea:focus {
+    outline: none;
+    box-shadow: 0 0 16px #ff4da6;
+    color: #fff;
+  }
+  .contact-section button {
+    width: 100%;
+    background: linear-gradient(45deg, #ff00b2, #ff4da6);
+    border: none;
+    padding: 1rem;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    box-shadow: 0 0 25px #ff00b2;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  .contact-section button:hover,
+  .contact-section button:focus {
+    background: linear-gradient(45deg, #ff4da6, #ff00b2);
+    outline: none;
+    box-shadow: 0 0 40px #ff4da6;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #120021;
+    font-size: 0.85rem;
+    color: #ff6bc0aa;
+    user-select: none;
+    letter-spacing: 0.1em;
+    border-top: 2px solid #ff00b2;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    nav a {
+      margin-left: 1rem;
+      font-size: 0.85rem;
+    }
+    .hero-section h2 {
+      font-size: 2rem;
+    }
+    .products-grid {
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    }
+    .how-to-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dasira LEROUX</h1>
+  <nav role="navigation" aria-label="Menu Navigasi Utama">
+    <a href="#produk" tabindex="0">Produk</a>
+    <a href="#cara-kerja" tabindex="0">Cara Kerja</a>
+    <a href="#kontak" tabindex="0">Kontak</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero-section" aria-label="Bagian Hero">
+    <h2 class="glitch" data-text="DASIRA LEROUX">DASIRA LEROUX</h2>
+    <p>Pasar game futuristik terbaik untuk beli & jual gear gaming favoritmu!</p>
+    <button class="btn-primary" onclick="location.href='#produk'">Jelajahi Produk</button>
+  </section>
+
+  <section class="products-section" id="produk" aria-label="Produk Unggulan">
+    <h3>Produk Unggulan</h3>
+    <div class="products-grid">
+      <article class="product-card" tabindex="0" aria-label="Keyboard Gaming Razer Huntsman harga dua juta lima ratus ribu rupiah">
+        <img class="product-img" src="images1.jpg" alt="Keyboard Gaming Razer Huntsman" />
+        <div class="product-info">
+          <h4>Keyboard Razer Huntsman</h4>
+          <p>Keyboard opto-mechanical dengan lampu RGB vibrant dan cepat responsif.</p>
+          <div class="price">Rp 2.500.000</div>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0" aria-label="Monitor Samsung Odyssey G7 27 inci harga empat juta dua ratus ribu rupiah">
+        <img class="product-img" src="images2.jpg" alt="Monitor Samsung Odyssey G7 27 inci" />
+        <div class="product-info">
+          <h4>Monitor Samsung Odyssey G7 27"</h4>
+          <p>Monitor gaming kurva QHD dengan refresh rate 240Hz dan latensi rendah.</p>
+          <div class="price">Rp 4.200.000</div>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0" aria-label="Headset Logitech G Pro X Prisim Wireless harga satu juta empat ratus lima puluh ribu rupiah">
+        <img class="product-img" src="images3.jpg" alt="Headset Logitech G Pro X Prism Wireless" />
+        <div class="product-info">
+          <h4>Headset Logitech G Pro X</h4>
+          <p>Headset wireless dengan suara surround dan mikrofon noise-canceling premium.</p>
+          <div class="price">Rp 1.450.000</div>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0" aria-label="Mouse SteelSeries Rival 600 harga satu juta dua ratus ribu rupiah">
+        <img class="product-img" src="images4.jpg" alt="Mouse SteelSeries Rival 600" />
+        <div class="product-info">
+          <h4>Mouse SteelSeries Rival 600</h4>
+          <p>Mouse gaming dual sensor dengan desain ergonomis untuk kenyamanan gaming.</p>
+          <div class="price">Rp 1.200.000</div>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0" aria-label="Headset Turtle Beach Stealth 700 harga satu juta delapan ratus ribu rupiah">
+        <img class="product-img" src="images5.jpg" alt="Headset Turtle Beach Stealth 700" />
+        <div class="product-info">
+          <h4>Headset Turtle Beach Stealth 700</h4>
+          <p>Wireless headset dengan surround sound dan microphone yang jernih.</p>
+          <div class="price">Rp 1.800.000</div>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0" aria-label="Mousepad RGB SteelSeries QcK Prism harga lima ratus ribu rupiah">
+        <img class="product-img" src="images6.jpg" alt="Mousepad RGB SteelSeries QcK Prism" />
+        <div class="product-info">
+          <h4>Mousepad SteelSeries QcK Prism</h4>
+          <p>Mousepad RGB dengan permukaan halus dan pencahayaan yang bisa dikustomisasi.</p>
+          <div class="price">Rp 500.000</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="how-to-section" id="cara-kerja" aria-label="Cara Kerja">
+    <h3>Cara Kerja</h3>
+    <div class="how-to-list" role="list">
+      <article class="how-to-step" tabindex="0" role="listitem" aria-label="Langkah satu cari produk"><div class="step-num">1</div>
+        <h4>Cari Produk</h4>
+        <p>Temukan gear dan aksesori gaming favoritmu dengan harga terbaik di Dasira LEROUX.</p>
+      </article>
+      <article class="how-to-step" tabindex="0" role="listitem" aria-label="Langkah dua hubungi penjual"><div class="step-num">2</div>
+        <h4>Hubungi Penjual</h4>
+        <p>Langsung kontak penjual untuk negosiasi harga dan bertanya detail produk.</p>
+      </article>
+      <article class="how-to-step" tabindex="0" role="listitem" aria-label="Langkah tiga transaksi aman"><div class="step-num">3</div>
+        <h4>Transaksi Aman</h4>
+        <p>Bayar dengan aman dan pantau pengiriman sampai produk sampai ke tanganmu.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="contact-section" id="kontak" aria-label="Kontak Kami">
+    <h3>Kontak Kami</h3>
+    <form id="contact-form" aria-describedby="form-desc" novalidate>
+      <p id="form-desc" style="color:#fcb2dd; text-align: center; margin-bottom: 1.5rem;">Isi formulir berikut untuk pertanyaan dan penawaran</p>
+      <label for="name">Nama</label>
+      <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" autocomplete="name" required aria-required="true" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="email@domain.com" autocomplete="email" required aria-required="true" />
+
+      <label for="message">Pesan</label>
+      <textarea id="message" name="message" rows="4" placeholder="Tulis pesan disini..." required aria-required="true"></textarea>
+
+      <button type="submit" aria-label="Kirim pesan">Kirim</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  &copy; 2024 Dasira LEROUX. Semua hak cipta dilindungi.
+</footer>
+
+<script>
+  const contactForm = document.getElementById('contact-form');
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = contactForm.name.value.trim();
+    const email = contactForm.email.value.trim();
+    const message = contactForm.message.value.trim();
+    if(!name || !email || !message){
+      alert('Mohon lengkapi semua bidang sebelum mengirim.');
+      return;
+    }
+    alert(\`Terima kasih, \${name}! Pesan kamu sudah kami terima dan akan kami balas ke \${email}.\`);
+    contactForm.reset();
+  });
+</script>
+</body>
+</html>
+
